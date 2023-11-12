@@ -25,10 +25,10 @@ typedef struct endereco {
 
 typedef struct cliente{
     char nome[50];
-    Data data[1];
+    Data data;
     char email[50];
     long int telefone;
-    Endereco endereco[1];
+    Endereco endereco;
 }Cliente;
 
 
@@ -41,16 +41,16 @@ Cliente solicitarInfosCliente() {
     printf("\n-------------Cadastro Cliente -------------\n");
     printf("\nNome: ");scanf("%s", c.nome);
     printf("\nData de nascimento: ");
-    printf("\nDia: ");scanf("%d", &c.data[0].dia);
-    printf("Mês: ");scanf("%d", &c.data[0].mes);
-    printf("Ano: ");scanf("%d", &c.data[0].ano);
+    printf("\nDia: ");scanf("%d", &c.data.dia);
+    printf("Mês: ");scanf("%d", &c.data.mes);
+    printf("Ano: ");scanf("%d", &c.data.ano);
     printf("\nE-mail: ");scanf("%s", c.email);
     printf("Telefone: ");scanf("%ld", &c.telefone);
     printf("Endereço: ");
-    printf("\nRua: ");scanf("%d", &c.endereco[0].rua);
-    printf("Número: ");scanf("%d", &c.endereco[0].numero);
-    printf("Bairro: ");scanf("%s", c.endereco[0].bairro);
-    printf("UF: ");scanf("%s", c.endereco[0].uf);
+    printf("\nRua: ");scanf("%d", &c.endereco.rua);
+    printf("Número: ");scanf("%d", &c.endereco.numero);
+    printf("Bairro: ");scanf("%s", c.endereco.bairro);
+    printf("UF: ");scanf("%s", c.endereco.uf);
     printf("\n\nSair - 0\nContinuar - 1\n");
     printf("\nOPÇÃO: "); 
     scanf("%d", &opc);
@@ -62,10 +62,10 @@ Cliente solicitarInfosCliente() {
 
 void imprimirClientes(Cliente c) {
     printf("\nNome: %s", c.nome);
-    printf("\nData de nascimento: %d/%d/%d", c.data->dia, c.data->mes,c.data->ano);
+    printf("\nData de nascimento: %d/%d/%d", c.data.dia, c.data.mes,c.data.ano);
     printf("\nE-mail: %s", c.email);
     printf("\nTelefone: %ld", c.telefone);
-    printf("\nEndereço:\nRua: %d\nNúmero: %d\nBairro: %s\nUF: %s", c.endereco->rua, c.endereco->numero, c.endereco->bairro, c.endereco->uf);
+    printf("\nEndereço:\nRua: %d\nNúmero: %d\nBairro: %s\nUF: %s", c.endereco.rua, c.endereco.numero, c.endereco.bairro, c.endereco.uf);
 }
 
 
