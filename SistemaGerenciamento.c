@@ -2,43 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-
+#include "structs.h"
 
 void clrscr()
 {
     system("@cls||clear");
 }
 
-typedef struct servicos{
-    char descricao[100];
-    int tipo;
-
-}Servicos;
-
-typedef struct data{
-    int dia;
-    int mes;
-    int ano;
-}Data;
-
-typedef struct endereco {
-    int cep;
-    int rua;
-    int numero;    
-    char bairro[30];
-    char uf[30];        
-}Endereco;
-
-typedef struct cliente{
-    char nome[50];
-    Data data;
-    char email[50];
-    long int telefone;
-    Endereco endereco;
-}Cliente;
 
 
-Cliente solicitarInfosCliente() {
+
+Cliente solicitarInfosCliente(){
 
     Cliente c;
     
@@ -60,6 +34,30 @@ Cliente solicitarInfosCliente() {
     return c;
 }
 
+Funcionarios solicitarInfosFuncionarios(){
+
+    Funcionarios c;
+    
+    printf("\nCADASTRO CLIENTE\n");
+    printf("\nNome: ");scanf("%s", c.nome);
+    printf("\nData de nascimento: ");
+    printf("\nDia: ");scanf("%d", &c.data.dia);
+    printf("Mês: ");scanf("%d", &c.data.mes);
+    printf("Ano: ");scanf("%d", &c.data.ano);
+    printf("\nE-mail: ");scanf("%s", c.email);
+    printf("\nConta Bancária: ");scanf("%d", &c.contaBancaria);
+    printf("Telefone: ");scanf("%ld", &c.telefone);
+    printf("Endereço: ");
+    printf("\nRua: ");scanf("%d", &c.endereco.rua);
+    printf("Número: ");scanf("%d", &c.endereco.numero);
+    printf("Bairro: ");scanf("%s", c.endereco.bairro);
+    printf("UF: ");scanf("%s", c.endereco.uf);
+    printf("\n\nCADASTRO REALIZADO.");
+    getchar();
+    return c;
+}
+
+
 
 
 void imprimirClientes(Cliente c) {
@@ -74,6 +72,8 @@ typedef struct no {
     Cliente cliente;
     struct no *proximo;
 }No;
+
+
 
 void inserir_no_inicio(No **listaClientes, Cliente cliente){
     No *novo = malloc(sizeof(No));
@@ -108,6 +108,8 @@ void inserir_no_fim(No **listaClientes, Cliente cliente){
     else
         printf("Erro ao alocar memória.");
 }
+
+
 
 /*void inserir_no_meio(No **listaCliente, Cliente cliente, Cliente ant){
     No *aux, *novo = malloc(sizeof(No));
@@ -155,11 +157,20 @@ int menuCliente(){
     return areaCliente;
 }
 
+int menuFuncionario(){
+    int areaFunc;
+    printf("\n-------- ÁREA FUNCIONÁRIO --------\n");
+    printf("\n0 - Sair\n1 - Cadastrar Funcionário\n2 - Lista Funcionários\n");
+    printf("\n----------------------------------\n");
+    printf("OPÇÃO: "); scanf("%d", &areaFunc);
+    return areaFunc;
+}
+
 int main(){
     setlocale(LC_ALL, "Portuguese_Brasil");
-    int opcao, areaCliente;
+    int opcao, areaCliente, areaFuncionario;
     No *listaCliente = NULL;
-    Cliente c;
+    Cliente c; Funcionarios f;
     do
     {
         printf("\n0 - Sair\n1 - Área Clientes\n2 - Área Funcionários\n3 - Área Serviços");
@@ -195,6 +206,26 @@ int main(){
             }while(areaCliente != 0);
 
         case 2:
+             do
+            {
+                areaFuncionario = menuFuncionario();
+                switch (areaFuncionario)
+                {
+                case 0:
+                    
+                    break;
+                case 1:
+                    f = solicitarInfosFuncionarios();
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                default:
+                    printf("Opção inválida.");
+                    break;
+                }
+            }while(areaCliente != 0);
 
             break; 
         case 3:
