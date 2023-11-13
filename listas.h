@@ -25,3 +25,8 @@ typedef struct cliente{
     long int telefone;
     Endereco endereco;
 }Cliente;
+
+typedef struct no {
+    Cliente cliente;
+    struct no *proximo;
+}No;
