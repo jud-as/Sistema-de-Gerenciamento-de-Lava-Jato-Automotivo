@@ -41,11 +41,6 @@ void imprimirClientes(Cliente c) {
     printf("\nEndereço:\nRua: %d\nNúmero: %d\nBairro: %s\nUF: %s", c.endereco.rua, c.endereco.numero, c.endereco.bairro, c.endereco.uf);
 }
 
-typedef struct no {
-    Cliente cliente;
-    struct no *proximo;
-}No;
-
 void inserir_no_inicio(No **listaClientes, Cliente cliente){
     No *novo = malloc(sizeof(No));
     if(novo){
