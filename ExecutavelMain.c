@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include "FuncLista.c"
+#include "FuncLista.h"
 
 
 int main(){

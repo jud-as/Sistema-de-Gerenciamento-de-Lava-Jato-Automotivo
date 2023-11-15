@@ -3,6 +3,7 @@
         "stdlib.h": "c",
         "structs.h": "c",
         "string.h": "c",
-        "locale.h": "c"
+        "locale.h": "c",
+        "stdio.h": "c"
     }
 }
