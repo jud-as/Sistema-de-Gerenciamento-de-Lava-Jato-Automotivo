@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <locale.h>
 #include "structs.h"
 
@@ -101,25 +102,47 @@ void imprimirServicos(Servicos s){
 
 void inserir_no_fim(No **listaClientes, Cliente cliente){
     No *aux, *novo = malloc(sizeof(No));
+    int i;
+
+
+    for(i=0;i<strlen(cliente.nome);i++){
+   			
+   		if(cliente.nome[0]>='a')
+         {
+            cliente.nome[0]-=32;
+
+        }
+        if(cliente.nome[i] == 32)
+        {
+
+            cliente.nome[i+1]-=32;
+
+         }      
+	
+    }
 
     if (novo){
         novo->cliente = cliente;
         novo->proximo = NULL;
 
         //é o primeiro?
-        if (*listaClientes == NULL)
+        if (*listaClientes == NULL || strcmp(cliente.nome, (*listaClientes)->cliente.nome) < 0){
+            novo->proximo = *listaClientes;
             *listaClientes = novo;
+        }
         else{
             aux = *listaClientes;
-            while (aux->proximo)
+            while (aux->proximo && strcmp(cliente.nome, aux->proximo->cliente.nome) >=0 )
             {
                 aux = aux->proximo;
             }
+            novo->proximo = aux->proximo;
             aux->proximo = novo; 
         }
     }
     else
         printf("Erro ao alocar memória.");
+
 }
 
 void inserir_no_fim_func(NoF **listaFunc, Funcionarios funcionarios){
@@ -153,16 +176,17 @@ void inserir_no_fim_serv(NoS **listaServ, Servicos servicos){
         novo->servicos = servicos;
         novo->proximo = NULL;
 
-        if (*listaServ == NULL)
+        if (*listaServ == NULL || servicos.valor < (*listaServ)->servicos.valor)
         {
             *listaServ = novo;
         }
         else{
             aux = *listaServ;
-            while (aux->proximo)
+            while (aux->proximo && servicos.valor >= aux->proximo->servicos.valor)
             {
                 aux = aux->proximo;
             }
+            novo->proximo = aux->proximo;
             aux->proximo = novo;
         }
     }
@@ -237,6 +261,32 @@ int menuServico(){
     printf("OPÇÃO: "); scanf("%d", &areaServ);
     return areaServ;
 }
+
+/*int compCliente(){
+
+
+    
+}
+
+
+void TableOrg(No *no){
+
+No pC = no->cliente.nome;
+int i;
+
+for(i=0;i<strlen(no->cliente.nome);i++){
+   			
+   			if((no->cliente.nome[i] =='a') ||  (no->cliente.nome[i] =='A'))
+         {
+            for(i=0;i<no->pC)
+            
+
+         }      
+
+}
+
+}*/
+
 
 
 

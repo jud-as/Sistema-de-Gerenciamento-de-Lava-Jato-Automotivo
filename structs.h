@@ -13,7 +13,7 @@ int DigitoVerf;
 
 }ContaBancaria;
 
-typedef struct endereco {
+typedef struct endereco{
     int cep;
     char rua[30];
     int numero;    
@@ -54,12 +54,12 @@ typedef struct servicoPrestado{
     char detalhamentoServico[100];
 }ServicoPrestado;
 
-typedef struct no {
+typedef struct no{
     Cliente cliente;
     struct no *proximo;
 }No;
 
-typedef struct nof {
+typedef struct nof{
     Funcionarios funcionarios;
     struct nof *proximo;
 }NoF;
