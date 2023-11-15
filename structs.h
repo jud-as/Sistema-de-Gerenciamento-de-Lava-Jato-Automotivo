@@ -15,10 +15,10 @@ int DigitoVerf;
 
 typedef struct endereco {
     int cep;
-    int rua;
+    char rua[30];
     int numero;    
     char bairro[30];
-    char uf[30];        
+    char uf[30];
 }Endereco;
 
 typedef struct cliente{
@@ -61,10 +61,10 @@ typedef struct no {
 
 typedef struct nof {
     Funcionarios funcionarios;
-    struct no *proximo;
+    struct nof *proximo;
 }NoF;
 
 typedef struct nos{
     Servicos servicos;
-    struct no *proximo;
+    struct nos *proximo;
 }NoS;

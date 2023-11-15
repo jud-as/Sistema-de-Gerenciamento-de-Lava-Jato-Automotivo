@@ -14,8 +14,9 @@ Cliente solicitarInfosCliente(){
     clrscr();
     Cliente c;
     
+    getchar();
     printf("\nCADASTRO CLIENTE\n");
-    printf("\nNome: ");scanf("%s", c.nome);
+    printf("\nNome: ");fgets(c.nome, 49, stdin);
     printf("\nData de nascimento: ");
     printf("\nDia: ");scanf("%d", &c.data.dia);
     printf("Mês: ");scanf("%d", &c.data.mes);
@@ -23,9 +24,11 @@ Cliente solicitarInfosCliente(){
     printf("\nE-mail: ");scanf("%s", c.email);
     printf("Telefone: ");scanf("%ld", &c.telefone);
     printf("Endereço: ");
-    printf("\nRua: ");scanf("%d", &c.endereco.rua);
+    getchar();
+    printf("\nRua: ");fgets(c.endereco.rua, 29, stdin);
     printf("Número: ");scanf("%d", &c.endereco.numero);
-    printf("Bairro: ");scanf("%s", c.endereco.bairro);
+    getchar();
+    printf("Bairro: ");fgets(c.endereco.bairro, 29, stdin);
     printf("UF: ");scanf("%s", c.endereco.uf);
     printf("\n\nCADASTRO REALIZADO.");
     getchar();
@@ -34,39 +37,42 @@ Cliente solicitarInfosCliente(){
 
 Funcionarios solicitarInfosFuncionarios(){
     clrscr();
-    Funcionarios c;
-    
-    printf("\nCADASTRO FUNCIONÁRIO\n");
-    printf("\nNome: ");scanf("%s", c.nome);
-    printf("\nData de nascimento: ");
-    printf("\nDia: ");scanf("%d", &c.data.dia);
-    printf("Mês: ");scanf("%d", &c.data.mes);
-    printf("Ano: ");scanf("%d", &c.data.ano);
-    printf("\nE-mail: ");scanf("%s", c.email);
-    printf("\nConta Bancária: ");
-    printf("\nNúmero da Agência: ");scanf("%d", &c.contaBancaria.NumeroAgencia);
-    printf("Número da Conta: ");scanf("%d", &c.contaBancaria.NumeroConta);
-    printf("Digito de Verificação: ");scanf("%d", &c.contaBancaria.DigitoVerf);
-    printf("Telefone: ");scanf("%ld", &c.telefone);
-    printf("Endereço: ");
-    printf("\nRua: ");scanf("%d", &c.endereco.rua);
-    printf("Número: ");scanf("%d", &c.endereco.numero);
-    printf("Bairro: ");scanf("%s", c.endereco.bairro);
-    printf("UF: ");scanf("%s", c.endereco.uf);
-    printf("\n\nCADASTRO REALIZADO.");
+    Funcionarios f;
     getchar();
-    return c;
+    printf("\nCADASTRO FUNCIONÁRIO\n");
+    printf("\nNome: ");fgets(f.nome,49,stdin);
+    printf("\nData de nascimento: ");
+    printf("\nDia: ");scanf("%d", &f.data.dia);
+    printf("Mês: ");scanf("%d", &f.data.mes);
+    printf("Ano: ");scanf("%d", &f.data.ano);
+    getchar();
+    printf("E-mail: ");fgets(f.email,49,stdin);
+    printf("\nConta Bancária: ");
+    printf("\nNúmero da Agência: ");scanf("%d", &f.contaBancaria.NumeroAgencia);
+    printf("Número da Conta: ");scanf("%d", &f.contaBancaria.NumeroConta);
+    printf("Digito de Verificação: ");scanf("%d", &f.contaBancaria.DigitoVerf);
+    printf("\nTelefone: ");scanf("%ld", &f.telefone);
+    printf("Endereço: ");
+    getchar();
+    printf("\nRua: ");fgets(f.endereco.rua,29,stdin);;
+    printf("Número: ");scanf("%d", &f.endereco.numero);
+    getchar();
+    printf("Bairro: ");fgets(f.endereco.bairro,29,stdin);
+    printf("UF: ");fgets(f.endereco.uf,29,stdin);
+    getchar();
+    printf("\n\nCADASTRO REALIZADO.");
+    return f;
 }
 
 Servicos solicitarInfosServicos(){
     clrscr();
     Servicos s;
-
+    getchar();
     printf("\nCADASTRO SERVIÇO:\n");
-    printf("\nNome Serviço: ");scanf("%s", s.nomeServico);
-    printf("Descrição do Serviço: ");scanf("%s", s.descricao);
+    printf("\nNome Serviço: "); fgets(s.nomeServico, 49, stdin); 
+    printf("Descrição do Serviço: ");fgets(s.descricao, 99, stdin);
     printf("Valor do Serviço: ");scanf("%f", &s.valor);
-
+    getchar();
     return s;
 }
 
@@ -75,22 +81,22 @@ void imprimirClientes(Cliente c){
     printf("\nData de nascimento: %d/%d/%d", c.data.dia, c.data.mes,c.data.ano);
     printf("\nE-mail: %s", c.email);
     printf("\nTelefone: %ld", c.telefone);
-    printf("\nEndereço:\nRua: %d\nNúmero: %d\nBairro: %s\nUF: %s", c.endereco.rua, c.endereco.numero, c.endereco.bairro, c.endereco.uf);
+    printf("\nEndereço:\nRua: %s\nNúmero: %d\nBairro: %s\nUF: %s", c.endereco.rua, c.endereco.numero, c.endereco.bairro, c.endereco.uf);
 }
 
-void imprimirFuncionarios(Funcionarios c){
-    printf("\nNome: %s", c.nome);
-    printf("\nData de nascimento: %d/%d/%d", c.data.dia, c.data.mes,c.data.ano);
-    printf("\nE-mail: %s", c.email);
-    printf("\nConta Bancária:\nNumero da Agência: %d\nNumero da Conta: %d\nDigito de Verificação: %d\n", c.contaBancaria.NumeroAgencia, c.contaBancaria.NumeroConta, c.contaBancaria.DigitoVerf);
-    printf("\nTelefone: %ld", c.telefone);
-    printf("\nEndereço:\nRua: %d\nNúmero: %d\nBairro: %s\nUF: %s", c.endereco.rua, c.endereco.numero, c.endereco.bairro, c.endereco.uf);
+void imprimirFuncionarios(Funcionarios f){
+    printf("\nNome: %s", f.nome);
+    printf("\nData de nascimento: %d/%d/%d", f.data.dia, f.data.mes,f.data.ano);
+    printf("\nE-mail: %s", f.email);
+    printf("\nConta Bancária:\nNumero da Agência: %d\nNumero da Conta: %d\nDigito de Verificação: %d\n", f.contaBancaria.NumeroAgencia, f.contaBancaria.NumeroConta, f.contaBancaria.DigitoVerf);
+    printf("\nTelefone: %ld", f.telefone);
+    printf("\nEndereço:\nRua: %sNúmero: %d\nBairro: %sUF: %s", f.endereco.rua, f.endereco.numero, f.endereco.bairro, f.endereco.uf);
 }
 
 void imprimirServicos(Servicos s){
     printf("\nNome: %s", s.nomeServico);
-    printf("\nDescrição: %s", s.descricao);
-    printf("\nValor: %.2f", s.valor);
+    printf("Descrição: %s", s.descricao);
+    printf("Valor: %.2f", s.valor);
 }
 
 void inserir_no_fim(No **listaClientes, Cliente cliente){
@@ -232,105 +238,6 @@ int menuServico(){
     return areaServ;
 }
 
-int main(){
-    setlocale(LC_ALL, "Portuguese_Brasil");
-    int opcao, areaCliente, areaFuncionario, areaServico;
-    No *listaCliente = NULL;
-    NoF *listaFunc = NULL;
-    NoS *listaServ = NULL;
-    Cliente c; 
-    Funcionarios f;
-    Servicos s;
-    do
-    {
-        printf("\n0 - Sair\n1 - Área Clientes\n2 - Área Funcionários\n3 - Área Serviços");
-        printf("\n\nOPÇÃO: ");
-        scanf("%d", &opcao);
-        getchar();
-        clrscr();
-        switch (opcao)
-        {
-        case 0:
-            break;
-            
-        case 1:
-            do
-            {
-                areaCliente = menuCliente();
-                switch (areaCliente)
-                {
-                case 0:
-                    
-                    break;
-                case 1:
-                    c = solicitarInfosCliente();
-                    inserir_no_fim(&listaCliente, c);
-                    break;
-                case 2:
-                    imprimir(listaCliente);
-                    break;
-                default:
-                    printf("Opção inválida.");
-                    break;
-                }
-            }while(areaCliente != 0);
-
-        case 2:
-             do
-            {
-                areaFuncionario = menuFuncionario();
-                switch (areaFuncionario)
-                {
-                case 0:
-                    
-                    break;
-                case 1:
-                    f = solicitarInfosFuncionarios();
-                    inserir_no_fim_func(&listaFunc, f);
-                    break;
-                case 2:
-                    imprimirF(listaFunc);
-                    break;
-                default:
-                    printf("Opção inválida.");
-                    break;
-                }
-            }while(areaFuncionario != 0);
-
-            break; 
-        case 3:
-            do
-            {
-                areaServico = menuServico();
-                switch (areaServico)
-                {
-                case 0:
-                    
-                    break;
-                case 1:
-                    s = solicitarInfosServicos();
-                    inserir_no_fim_serv(&listaServ, s);
-                    break;
-                case 2:
-                    imprimirS(listaServ);
-                    break;
-                default:
-                    printf("Opção inválida.");
-                    break;
-                }
-            } while (areaServico != 0);
-            
-            break;
-
-        default:
-            printf("Opção inválida.");
-            break;
-        }
-
-    } while (opcao != 0);
-
-    return 0;
-}
 
 
 /*
