@@ -48,6 +48,7 @@ Funcionarios solicitarInfosFuncionarios(){
     printf("Ano: ");scanf("%d", &f.data.ano);
     getchar();
     printf("E-mail: ");fgets(f.email,49,stdin);
+    printf("\nCargo Atribuido: ");scanf("%d", &f.contaBancaria.NumeroAgencia);
     printf("\nConta Bancária: ");
     printf("\nNúmero da Agência: ");scanf("%d", &f.contaBancaria.NumeroAgencia);
     printf("Número da Conta: ");scanf("%d", &f.contaBancaria.NumeroConta);
@@ -60,7 +61,7 @@ Funcionarios solicitarInfosFuncionarios(){
     getchar();
     printf("Bairro: ");fgets(f.endereco.bairro,29,stdin);
     printf("UF: ");fgets(f.endereco.uf,29,stdin);
-    getchar();
+   
     printf("\n\nCADASTRO REALIZADO.");
     return f;
 }
@@ -76,6 +77,8 @@ Servicos solicitarInfosServicos(){
     getchar();
     return s;
 }
+
+
 
 void imprimirClientes(Cliente c){
     printf("\nNome: %s", c.nome);
@@ -95,9 +98,10 @@ void imprimirFuncionarios(Funcionarios f){
 }
 
 void imprimirServicos(Servicos s){
+    printf("\nCodigo de Serviço: %d", s.codServico);
     printf("\nNome: %s", s.nomeServico);
     printf("Descrição: %s", s.descricao);
-    printf("Valor: %.2f", s.valor);
+    printf("Valor: %.2f\n", s.valor);
 }
 
 void inserir_no_fim(No **listaClientes, Cliente cliente){
@@ -117,8 +121,7 @@ void inserir_no_fim(No **listaClientes, Cliente cliente){
 
             cliente.nome[i+1]-=32;
 
-         }      
-	
+        }
     }
 
     if (novo){
@@ -169,16 +172,22 @@ void inserir_no_fim_func(NoF **listaFunc, Funcionarios funcionarios){
         printf("Erro ao alocar memória.");
 }
 
+
+
 void inserir_no_fim_serv(NoS **listaServ, Servicos servicos){
     NoS *aux, *novo = malloc(sizeof(NoS));
+    
     if (novo)
     {
         novo->servicos = servicos;
         novo->proximo = NULL;
+        
 
         if (*listaServ == NULL || servicos.valor < (*listaServ)->servicos.valor)
         {
+            novo->proximo = *listaServ;
             *listaServ = novo;
+            
         }
         else{
             aux = *listaServ;
@@ -186,12 +195,16 @@ void inserir_no_fim_serv(NoS **listaServ, Servicos servicos){
             {
                 aux = aux->proximo;
             }
+            
             novo->proximo = aux->proximo;
             aux->proximo = novo;
+            
         }
+
     }
     else
         printf("Erro ao alocar memória."); 
+
 }
 
 
@@ -246,7 +259,7 @@ int menuFuncionario(){
     
     int areaFunc;
     printf("\n-------- ÁREA FUNCIONÁRIO --------\n");
-    printf("\n0 - Sair\n1 - Cadastrar Funcionário\n2 - Listar Funcionários\n");
+    printf("\n0 - Sair\n1 - Cadastrar Funcionário\n2 - Listar Funcionários\n3 - Buscar por Cargo");
     printf("\n------------------------------------\n");
     printf("OPÇÃO: "); scanf("%d", &areaFunc);
     return areaFunc;

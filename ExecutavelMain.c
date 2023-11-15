@@ -81,6 +81,7 @@ int main(){
                     break;
                 case 1:
                     s = solicitarInfosServicos();
+                    
                     inserir_no_fim_serv(&listaServ, s);
                     break;
                 case 2:
