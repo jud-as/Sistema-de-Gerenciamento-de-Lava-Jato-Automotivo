@@ -14,6 +14,9 @@ int main(){
     Cliente c; 
     Funcionarios f;
     Servicos s;
+    char buscaUF[3];
+    No *clienteBusca;
+
     do
     {
         printf("\n0 - Sair\n1 - Área Clientes\n2 - Área Funcionários\n3 - Área Serviços");
@@ -42,6 +45,15 @@ int main(){
                 case 2:
                     imprimir(listaCliente);
                     break;
+                case 3:
+                    printf("\nDigite um estado: "); scanf("%s", buscaUF);
+                    clienteBusca = buscaCliente(&listaCliente, buscaUF);
+                    if (clienteBusca)
+                    {
+                        printf("\nNenhum elemento encontrado.");
+                    }
+                    
+                    break;
                 default:
                     printf("Opção inválida.");
                     break;
@@ -59,6 +71,7 @@ int main(){
                     break;
                 case 1:
                     f = solicitarInfosFuncionarios();
+                    f.codFuncionario = codRegistro();
                     inserir_no_fim_func(&listaFunc, f);
                     break;
                 case 2:
@@ -80,12 +93,14 @@ int main(){
                     
                     break;
                 case 1:
-                    s = solicitarInfosServicos();
-                    
+                    s = solicitarInfosServicos();             
+                    s.codServico = codRegistro();       
                     inserir_no_fim_serv(&listaServ, s);
                     break;
                 case 2:
                     imprimirS(listaServ);
+                    break;
+                case 3:
                     break;
                 default:
                     printf("Opção inválida.");

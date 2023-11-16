@@ -18,7 +18,7 @@ typedef struct endereco{
     char rua[30];
     int numero;    
     char bairro[30];
-    char uf[30];
+    char uf[3];
 }Endereco;
 
 typedef struct cliente{
@@ -31,6 +31,7 @@ typedef struct cliente{
 }Cliente;
 
 typedef struct funcionarios{
+    int codFuncionario;
     char nome[50];
     Data data;
     char email[50];
@@ -46,13 +47,6 @@ typedef struct servicos{
     float valor;
 }Servicos;
 
-typedef struct servicoPrestado{
-    Servicos servicoPrestado;
-    Funcionarios funcionarioPrestador;
-    Cliente clienteAtendido;
-    Data dataServico;
-    char detalhamentoServico[100];
-}ServicoPrestado;
 
 typedef struct no{
     Cliente cliente;
@@ -68,3 +62,13 @@ typedef struct nos{
     Servicos servicos;
     struct nos *proximo;
 }NoS;
+
+
+typedef struct servicoPrestado{
+    Servicos servicoPrestado;
+    Funcionarios funcionarioPrestador;
+    Cliente clienteAtendido;
+    Data dataServico;
+    char detalhamentoServico[100];
+}ServicoPrestado;
+
