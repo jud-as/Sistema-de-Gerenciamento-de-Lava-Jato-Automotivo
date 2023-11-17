@@ -85,7 +85,7 @@ ServicoPrestado solicitarInfosServicosPrestados(){
     printf("CÓDIGO SERVICO: ");scanf("%d", &sp.servicoPrestado.codServico);
     printf("CPF CLIENTE ATENDIDO: ");scanf("%ld", &sp.clienteAtendido.cpf);
     getchar();
-    printf("\nLOCAL DE ATENDIMENTO (UF): ");fgets(sp.servicoPrestado.uf,3,stdin);
+    printf("\nLOCAL DE ATENDIMENTO (UF): ");fgets(sp.endereco.uf,3,stdin);
     printf("\nData do atendimento: ");
     printf("\nDia: ");scanf("%d", &sp.dataServico.dia);
     printf("Mês: ");scanf("%d", &sp.dataServico.mes);

@@ -8,7 +8,7 @@ void imprimirServicosPrestados(ServicoPrestado sp){
     printf("\nNOME DO CLIENTE: %s",sp.clienteAtendido.nome);
     printf("\nDATA: %d/%d/%d", sp.dataServico.dia,  sp.dataServico.mes, sp.dataServico.ano);
     printf("\nDESCRIÇÃO: %s", sp.detalhamentoServico);
-    printf("\nLOCAL DE ATENDIMENTO: %s", sp.servicoPrestado.uf);
+    printf("\nLOCAL DE ATENDIMENTO: %s", sp.endereco.uf);
 }
 
 void imprimirClientes(Cliente c){
@@ -63,7 +63,6 @@ void imprimirF(NoF *no){
 }
 
 void imprimirS(NoS *no){
-    
     printf("\n------ LISTA SERVIÇOS --------\n");
     while (no)
     {
@@ -75,14 +74,19 @@ void imprimirS(NoS *no){
 }
 
 void imprimirSp(NoSp *no){
-    
+    NoSp *aux;
+    aux = no;
+
     printf("\n------ LISTA SERVIÇOS PRESTADOS --------\n");
     while (no)
     {
+        if (aux->servicoPrestrado.servicoPrestado.valor < no->servicoPrestrado.servicoPrestado.valor)
+            aux = no;
         imprimirServicosPrestados(no->servicoPrestrado);
         printf("\n\n");
         no = no->proximo;    
     }
+    printf("\n\nESTADO MAIS LUCRATIVO: %s", aux->servicoPrestrado.endereco.uf);
     printf("\n\n----------- FIM LISTA ------------");
 }
 
