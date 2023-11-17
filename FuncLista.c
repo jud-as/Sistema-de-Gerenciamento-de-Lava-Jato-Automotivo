@@ -6,6 +6,7 @@
 #include <time.h>
 #include "structs.h"
 
+
 void clrscr()
 {
     system("@cls||clear");
@@ -19,13 +20,14 @@ Cliente solicitarInfosCliente(){
     getchar();
     printf("\nCADASTRO CLIENTE\n");
     printf("\nNome: ");fgets(c.nome, 49, stdin);
+    printf("CPF: ");scanf("%ld",&c.cpf);
     printf("\nData de nascimento: ");
     printf("\nDia: ");scanf("%d", &c.data.dia);
     printf("Mês: ");scanf("%d", &c.data.mes);
     printf("Ano: ");scanf("%d", &c.data.ano);
     printf("\nE-mail: ");scanf("%s", c.email);
     printf("Telefone: ");scanf("%ld", &c.telefone);
-    printf("Endereço: ");
+    printf("\nEndereço: ");
     getchar();
     printf("\nRua: ");fgets(c.endereco.rua, 29, stdin);
     printf("Número: ");scanf("%d", &c.endereco.numero);
@@ -43,19 +45,20 @@ Funcionarios solicitarInfosFuncionarios(){
     getchar();
     printf("\nCADASTRO FUNCIONÁRIO\n");
     printf("\nNome: ");fgets(f.nome,49,stdin);
+    printf("CPF: ");scanf("%ld",&f.cpf);
     printf("\nData de nascimento: ");
     printf("\nDia: ");scanf("%d", &f.data.dia);
     printf("Mês: ");scanf("%d", &f.data.mes);
     printf("Ano: ");scanf("%d", &f.data.ano);
     getchar();
     printf("E-mail: ");fgets(f.email,49,stdin);
-    printf("\nCargo Atribuido: ");scanf("%d", &f.contaBancaria.NumeroAgencia);
+    printf("\nCargo Atribuido: ");fgets(f.cargo,19,stdin);
     printf("\nConta Bancária: ");
     printf("\nNúmero da Agência: ");scanf("%d", &f.contaBancaria.NumeroAgencia);
     printf("Número da Conta: ");scanf("%d", &f.contaBancaria.NumeroConta);
     printf("Digito de Verificação: ");scanf("%d", &f.contaBancaria.DigitoVerf);
     printf("\nTelefone: ");scanf("%ld", &f.telefone);
-    printf("Endereço: ");
+    printf("\nEndereço: ");
     getchar();
     printf("\nRua: ");fgets(f.endereco.rua,29,stdin);;
     printf("Número: ");scanf("%d", &f.endereco.numero);
@@ -79,11 +82,42 @@ Servicos solicitarInfosServicos(){
     return s;
 }
 
+ServicoPrestado solicitarInfosServicosPrestados(){
+    clrscr();
+    ServicoPrestado sp; 
+    
+    printf("\nCADASTRO SERVIÇO PRESTADO:\n");
+    printf("CÓDIGO FUNCIONÁRIO: ");scanf("%d", &sp.funcionarioPrestador.codFuncionario);   
+    printf("CÓDIGO SERVICO: ");scanf("%d", &sp.servicoPrestado.codServico);
+    printf("CPF CLIENTE ATENDIDO: ");scanf("%ld", &sp.clienteAtendido.cpf);
+    getchar();
+    printf("\nLOCAL DE ATENDIMENTO (UF): ");scanf("%s", sp.uf);
+    printf("\nData do atendimento: ");
+    printf("\nDia: ");scanf("%d", &sp.dataServico.dia);
+    printf("Mês: ");scanf("%d", &sp.dataServico.mes);
+    printf("Ano: ");scanf("%d", &sp.dataServico.ano);
+    getchar();
+    printf("\nObservações do serviço: ");fgets(sp.detalhamentoServico, 100, stdin);
+    return sp;     
+}
 
+void imprimirServicosPrestados(ServicoPrestado sp){
+
+    printf("\nCÓDIGO FUNCIONÁRIO: %d", sp.funcionarioPrestador.codFuncionario);
+    printf("\nNOME DO FUNCIONÁRIO: %s",sp.funcionarioPrestador.nome);
+    printf("\nCÓDIGO DO SERVIÇO: %d",sp.servicoPrestado.codServico);
+    printf("\nTIPO DO SERVIÇO: %s",sp.servicoPrestado.nomeServico);
+    printf("\nCPF CLIENTE: %ld",sp.clienteAtendido.cpf);
+    printf("\nNOME DO CLIENTE: %s",sp.clienteAtendido.nome);
+    printf("\nDATA: %d/%d/%d", sp.dataServico.dia,  sp.dataServico.mes, sp.dataServico.ano);
+    printf("\nDESCRIÇÃO: %s", sp.detalhamentoServico);
+    printf("\nLOCAL DE ATENDIMENTO: %s", sp.servicoPrestado.uf);
+}
 
 void imprimirClientes(Cliente c){
     printf("\nNome: %s", c.nome);
-    printf("Data de nascimento: %d/%d/%d", c.data.dia, c.data.mes,c.data.ano);
+    printf("\nCPF: %ld", c.cpf);
+    printf("\nData de nascimento: %d/%d/%d", c.data.dia, c.data.mes,c.data.ano);
     printf("\nE-mail: %s", c.email);
     printf("\nTelefone: %ld", c.telefone);
     printf("\nEndereço:\nRua: %sNúmero: %d\nBairro: %sUF: %s", c.endereco.rua, c.endereco.numero, c.endereco.bairro, c.endereco.uf);
@@ -91,11 +125,12 @@ void imprimirClientes(Cliente c){
 
 void imprimirFuncionarios(Funcionarios f){
     printf("\nCÓDIGO: %d", f.codFuncionario);
-    printf("Nome: %s", f.nome);
+    printf("\nNome: %s", f.nome);
+    printf("CPF: %ld", f.cpf);
     printf("\nData de nascimento: %d/%d/%d", f.data.dia, f.data.mes,f.data.ano);
-    printf("\nE-mail: %s", f.email);
     printf("\nConta Bancária:\nNumero da Agência: %d\nNumero da Conta: %d\nDigito de Verificação: %d\n", f.contaBancaria.NumeroAgencia, f.contaBancaria.NumeroConta, f.contaBancaria.DigitoVerf);
     printf("\nTelefone: %ld", f.telefone);
+    printf("\nE-mail: %s", f.email);
     printf("\nEndereço:\nRua: %sNúmero: %d\nBairro: %sUF: %s", f.endereco.rua, f.endereco.numero, f.endereco.bairro, f.endereco.uf);
 }
 
@@ -122,6 +157,62 @@ No* buscaCliente(No **listaClientes, char *buscaUF){
     return no;
 }
 
+    NoSp* buscaFuncTipo(NoSp **listaServPrest, int codServico){
+    NoSp *aux, *no = NULL;
+    aux = *listaServPrest;
+    while (aux)
+    {
+        if(codServico == aux->servicoPrestrado.servicoPrestado.codServico){
+            printf("\n\n");
+            imprimirFuncionarios(aux->servicoPrestrado.funcionarioPrestador);
+        }
+        aux = aux->proximo;
+    }
+
+    return no;
+}
+
+Funcionarios *buscaFuncionario(NoF **listaFuncionarios, int *buscaCodigo){
+    NoF *aux;
+    aux = *listaFuncionarios;
+    while (aux && *buscaCodigo != aux->funcionarios.codFuncionario){
+        aux = aux->proximo;
+    }
+    if (aux)
+    {
+        return &(aux->funcionarios);
+    } else{
+        return NULL;
+    }
+}
+
+Cliente *buscaClienteCpf(No **listaClientes, int *buscaCodigo){
+    No *aux;
+    aux = *listaClientes;
+    while (aux && *buscaCodigo != aux->cliente.cpf){
+        aux = aux->proximo;
+    }
+    if (aux)
+    {
+        return &(aux->cliente);
+    } else{
+        return NULL;
+    }
+}
+
+Servicos *buscaServicoCod(NoS **listaServico, int *buscaCodigo){
+    NoS *aux;
+    aux = *listaServico;
+    while(aux && *buscaCodigo != aux->servicos.codServico){
+        aux = aux->proximo;
+    }
+    if(aux)
+    {
+        return &(aux->servicos);
+    } else{
+        return NULL;
+    }
+}
 
 
 void inserir_no_fim(No **listaClientes, Cliente cliente){
@@ -143,6 +234,7 @@ void inserir_no_fim(No **listaClientes, Cliente cliente){
 
         }
     }
+
 
     if (novo){
         novo->cliente = cliente;
@@ -171,6 +263,24 @@ void inserir_no_fim(No **listaClientes, Cliente cliente){
 
 void inserir_no_fim_func(NoF **listaFunc, Funcionarios funcionarios){
     NoF *aux, *novo = malloc(sizeof(NoF));
+     int i;
+    
+    
+     for(i=0; i < strlen(funcionarios.nome); i++){
+   			
+   		if(funcionarios.nome[0]>='a')
+         {
+            funcionarios.nome[0]-=32;
+
+        }
+        if(funcionarios.nome[i] == 32)
+        {
+
+           funcionarios.nome[i+1]-=32;
+
+        }
+    }
+
 
     if (novo)
     {
@@ -198,6 +308,25 @@ void inserir_no_fim_func(NoF **listaFunc, Funcionarios funcionarios){
 void inserir_no_fim_serv(NoS **listaServ, Servicos servicos){
     NoS *aux, *novo = malloc(sizeof(NoS));
     
+    int i;
+    
+    
+    for(i=0; i < strlen(servicos.nomeServico); i++){
+   			
+   		if(servicos.nomeServico[0]>='a')
+         {
+            servicos.nomeServico[0]-=32;
+
+        }
+        if(servicos.nomeServico[i] == 32)
+        {
+
+           servicos.nomeServico[i+1]-=32;
+
+        }
+    }
+
+
     if (novo)
     {
         novo->servicos = servicos;
@@ -220,51 +349,76 @@ void inserir_no_fim_serv(NoS **listaServ, Servicos servicos){
             novo->proximo = aux->proximo;
             aux->proximo = novo;
             
-        }
+        } 
 
     }
     else
         printf("Erro ao alocar memória."); 
+}
 
+void inserir_servicos_prestados(NoSp **listaServPrest, ServicoPrestado servicoPrestado){
+    NoSp *novo = malloc(sizeof(NoSp));
+
+    if (novo)
+    {
+        novo->servicoPrestrado = servicoPrestado;
+        novo->proximo = *listaServPrest;
+        *listaServPrest = novo;
+    }
+    else{
+        printf("Erro ao alocar memória.\n");
+    }
+    
 }
 
 
 void imprimir(No *no){
     
-    printf("\n-------- LISTA CLIENTES ----------");
+    printf("\n-------- LISTA CLIENTES ----------\n");
     while (no)
     {
         imprimirClientes(no->cliente);
-        printf("\n");
+        printf("\n\n");
         no = no->proximo;    
     }
-    printf("\n\n----------- FIM LISTA ------------");
+    printf("\n\n----------- FIM LISTA ------------\n");
 }
 
 void imprimirF(NoF *no){
     
-    printf("\n------ LISTA FUNCIONÁRIOS --------");
+    printf("\n------ LISTA FUNCIONÁRIOS --------\n");
     while (no)
     {
         imprimirFuncionarios(no->funcionarios);
-        printf("\n");
+        printf("\n\n");
         no = no->proximo;    
     }
-    printf("\n\n----------- FIM LISTA ------------");
+    printf("\n\n----------- FIM LISTA ------------\n");
 }
 
 void imprimirS(NoS *no){
     
-    printf("\n------ LISTA SERVIÇOS --------");
+    printf("\n------ LISTA SERVIÇOS --------\n");
     while (no)
     {
         imprimirServicos(no->servicos);
-        printf("\n");
+        printf("\n\n");
+        no = no->proximo;    
+    }
+    printf("\n\n----------- FIM LISTA ------------\n");
+}
+
+void imprimirSp(NoSp *no){
+    
+    printf("\n------ LISTA SERVIÇOS PRESTADOS --------\n");
+    while (no)
+    {
+        imprimirServicosPrestados(no->servicoPrestrado);
+        printf("\n\n");
         no = no->proximo;    
     }
     printf("\n\n----------- FIM LISTA ------------");
 }
-
 
 int menuCliente(){
     int areaCliente;
@@ -290,7 +444,7 @@ int menuServico(){
     
     int areaServ;
     printf("\n-------- ÁREA SERVIÇOS --------\n");
-    printf("\n0 - Sair\n1 - Cadastrar Serviços\n2 - Listar Serviços\n3 - Listar Serviços Prestados");
+    printf("\n0 - Sair\n1 - Cadastrar Serviços\n2 - Listar Serviços\n3 - Cadastrar Serviços Prestados\n4 - Listar Serviços Prestados");
     printf("\n------------------------------------\n");
     printf("OPÇÃO: "); scanf("%d", &areaServ);
     return areaServ; 
@@ -299,66 +453,8 @@ int menuServico(){
 int codRegistro(){
 
     srand(time(NULL));
+
     int x = rand()%100;
+    x = x + 1;
     return x;
 }
-
-/*
-void TableOrg(No *no){
-
-No pC = no->cliente.nome;
-int i;
-
-for(i=0;i<strlen(no->cliente.nome);i++){
-   			
-   			if((no->cliente.nome[i] =='a') ||  (no->cliente.nome[i] =='A'))
-         {
-            for(i=0;i<no->pC)
-            
-
-         }      
-
-}
-
-}*/
-
-
-
-
-/*
-void inserir_no_inicio(No **listaClientes, Cliente cliente){
-    No *novo = malloc(sizeof(No));
-    if(novo){
-        novo->cliente = cliente;
-        novo->proximo = *listaClientes;
-        *listaClientes = novo;
-    }
-    else
-        printf("Erro ao alocar memória.\n");
-}
-//*/
-
-/*void inserir_no_meio(No **listaCliente, Cliente cliente, Cliente ant){
-    No *aux, *novo = malloc(sizeof(No));
-
-    if(novo)
-    {
-        novo->cliente = cliente;
-        //é o primeiro?
-        if(*listaCliente == NULL)
-        {
-            novo->proximo = NULL;
-            *listaCliente = novo;
-        }else{
-            aux = *listaCliente;
-            while(aux->cliente != ant && aux->proximo)
-            {
-                aux = aux->proximo;
-            }
-            novo->proximo = aux->proximo;
-            aux->proximo = novo;
-        }
-    }else{
-        printf("\nErro ao alocar memória.");
-    }  
-}*/
