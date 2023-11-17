@@ -51,12 +51,11 @@ typedef struct servicos{
     float valor;
 }Servicos;
 
-typedef struct servicoPrestado{
+typedef struct servicoPrestado{ 
     Servicos servicoPrestado;
     Funcionarios funcionarioPrestador;
     Cliente clienteAtendido;
     Data dataServico;
-    char uf[3];
     char detalhamentoServico[100];
 }ServicoPrestado;
 

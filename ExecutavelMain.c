@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include "FuncLista.c"
+#include "OrdBuscInsert.c"
 
 
 int main(){
@@ -18,11 +18,12 @@ int main(){
     ServicoPrestado sp;
     char buscaUF[3];
     int buscaCod;
+    float gastoMensal;
     No *clienteBusca;
     
     do
     {
-        printf("\n0 - Sair\n1 - Área Clientes\n2 - Área Funcionários\n3 - Área Serviços\n4 - Lava-Jato");
+        printf("\n0 - Sair\n1 - Área Clientes\n2 - Área Funcionários\n3 - Área Serviços\n4 - Calculo Preço");
         printf("\n\nOPÇÃO: ");
         scanf("%d", &opcao);
         getchar();
@@ -138,7 +139,8 @@ int main(){
             } while (areaServico != 0);
             break;
         case 4:
-
+            printf("Gasto mensal: "); scanf("%f", &gastoMensal);
+            printf("\nCota diária recomendada: %.2f", calculoPreco(gastoMensal));
             break;
         default:
             printf("Opção inválida.");
